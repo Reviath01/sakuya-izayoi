@@ -43,5 +43,10 @@ class User(commands.Cog):
         messageembed.set_image(url=member.avatar_url)
         await ctx.send(embed=messageembed)
 
+    @commands.command(brief="Invite me!", description="My invite link")
+    async def invite(self, ctx):
+        inviteembed = discord.Embed(colour=discord.Colour.red(), description="[Click here to invite me!](https://discordapp.com/oauth2/authorize?client_id=808385152601817169&scope=bot&permissions=8)")
+        await ctx.send(embed=inviteembed)
+
 def setup(client):
     client.add_cog(User(client))
