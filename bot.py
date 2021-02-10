@@ -31,6 +31,15 @@ async def unload(ctx, extension):
     else:
         await ctx.send('This command is only for my author')
 
+@client.command(brief="Author command", description="Author command")
+async def reload(ctx, extension):
+    if str(ctx.author.id) == "770218429096656917":
+        client.unload_extension(f'cogs.{extension}')
+        client.load_extension(f'cogs.{extension}')
+        await ctx.send(':+1:')
+    else:
+        await ctx.send('This command is only for my author')
+
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
