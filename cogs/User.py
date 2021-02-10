@@ -48,5 +48,12 @@ class User(commands.Cog):
         inviteembed = discord.Embed(colour=discord.Colour.red(), description="[Click here to invite me!](https://discordapp.com/oauth2/authorize?client_id=808385152601817169&scope=bot&permissions=8)")
         await ctx.send(embed=inviteembed)
 
+    @commands.command(brief="Show's all roles", description="Show's role list")
+    async def roles(self, ctx):
+        roles = [role.mention for role in ctx.guild.roles[1:]]
+        roles.append('@everyone')
+        rolesembed = discord.Embed(colour=discord.Colour.green(), description=", ".join(roles))
+        await ctx.send(embed=rolesembed)
+
 def setup(client):
     client.add_cog(User(client))
