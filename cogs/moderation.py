@@ -21,9 +21,22 @@ class Moderation(commands.Cog):
             return
         if reason == None:
             reason = "Unspecified"
-        message = f"You have been banned from {ctx.guild.name} for {reason}."
         await ctx.guild.ban(member, reason=reason)
         await ctx.send(f"{member} is banned!")
+        
+    @commands.command(brief="Kick the user", description="Allow's you to kick the user")
+    @commands.has_permissions(kick_members = True)
+    async def kick(self, ctx, member:discord.User = None, reason = None):
+        if member == None:
+            await ctx.send('You need to mention someone.')
+            return
+        if member == ctx.message.author:
+            await ctx.send('You can\'t kick yourself.')
+            return
+        if reason == None:
+            reason = "Unspecified"
+        await ctx.guild.kick(member, reason=reason)
+        await ctx.send(f"{member} is kicked!")
         
 def setup(client):
     client.add_cog(Moderation(client))
