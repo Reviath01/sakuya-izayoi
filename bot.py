@@ -2,6 +2,7 @@ import discord
 import os
 from discord.ext import commands, tasks
 from itertools import cycle
+import ast
 
 client = commands.Bot(command_prefix = "!")
 status = cycle(['Leviathan Dev Team', 'Reviath'])
