@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import json
 
 class Moderation(commands.Cog):
 
@@ -64,9 +65,24 @@ class Moderation(commands.Cog):
 
     @commands.command(brief="Deletes messages", description="Deletes messages")
     @commands.has_permissions(manage_messages=True)
-    async def clear(self, ctx, amount=5):
+    async def clear(self, ctx, amount : int):
         await ctx.channel.purge(limit=amount + 1)
         await ctx.send(f'Cleared {amount} messages.')
+
+    @commands.command(brief="Allows you to set prefix", description="Allows you to set prefix")
+    @commands.has_permissions(administrator=True)
+    async def prefix(self, ctx, *, prefix=None):
+        if prefix == None:
+            await ctx.send('You need to send the new prefix')
+            return
+        with open('prefixes.json', 'r') as f:
+            prefixes = json.load(f)
+
+            prefixes[str(ctx.guild.id)] = prefix
+
+        with open('prefixes.json', 'w') as f:
+            json.dump(prefixes, f, indent=4)
+        await ctx.send('Succesfully changed prefix')
 
 def setup(client):
     client.add_cog(Moderation(client))
