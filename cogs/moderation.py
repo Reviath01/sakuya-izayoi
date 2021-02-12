@@ -62,5 +62,11 @@ class Moderation(commands.Cog):
         await msg.add_reaction(emoji)
         await msg.add_reaction(emoji2)
 
+    @commands.command(brief="Deletes messages", description="Deletes messages")
+    @commands.has_permissions(manage_messages=True)
+    async def clear(self, ctx, amount=5):
+        await ctx.channel.purge(limit=amount + 1)
+        await ctx.send(f'Cleared {amount} messages.')
+
 def setup(client):
     client.add_cog(Moderation(client))

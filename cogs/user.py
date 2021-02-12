@@ -1,4 +1,4 @@
-import discord 
+import discord
 from discord.ext import commands
 import os
 import psutil
@@ -29,15 +29,15 @@ class User(commands.Cog):
                           title=f"User Info - {member}")
         embed.set_thumbnail(url=member.avatar_url)
         embed.set_footer(text=f"Requested by {ctx.author}")
-
         embed.add_field(name="ID:", value=member.id)
         embed.add_field(name="Display Name:", value=member.display_name)
-
         embed.add_field(name="Created Account On:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
         embed.add_field(name="Joined Server On:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
-
         embed.add_field(name="Roles:", value=", ".join(roles))
         embed.add_field(name="Highest Role:", value=member.top_role.mention)
+        embed.add_field(name="Status", value=str(member.status))
+        embed.add_field(name="Activity", value=f"{str(member.activity.type).split('.')[-1].title() if member.activity else 'N/A'} {member.activity.name if member.activity else ''}")
+        embed.add_field(name="Bot", value=member.bot)
         await ctx.send(embed=embed)
 
     @commands.command(brief="Fetch the profile picture of a user", description="Fetch the profile picture of a user", aliases=["pfp", "profile", "pp"])
