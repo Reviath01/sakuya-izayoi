@@ -38,5 +38,16 @@ class Moderation(commands.Cog):
         await ctx.guild.kick(member, reason=reason)
         await ctx.send(f"{member} is kicked!")
         
+
+    @commands.command(brief="Unban the user", description="Unban's the user")
+    async def unban(self, ctx, *, member = None):
+        if member == None:
+            await ctx.send('You need to specify a ID')
+            return
+        user = await self.client.fetch_user(member)
+        await ctx.guild.unban(user)
+        await ctx.send(f'Unbanned <@{user.id}>')
+        return
+
 def setup(client):
     client.add_cog(Moderation(client))

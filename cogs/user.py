@@ -36,7 +36,7 @@ class User(commands.Cog):
         embed.add_field(name="Created Account On:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
         embed.add_field(name="Joined Server On:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
 
-        embed.add_field(name="Roles:", value="".join(roles))
+        embed.add_field(name="Roles:", value=", ".join(roles))
         embed.add_field(name="Highest Role:", value=member.top_role.mention)
         await ctx.send(embed=embed)
 
