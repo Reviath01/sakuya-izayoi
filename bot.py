@@ -1,11 +1,10 @@
 import discord
 import os
-from discord.enums import _is_descriptor
 from discord.ext import commands, tasks
 from itertools import cycle
 import sys
 
-prefix = "!"  
+prefix = "!"
 
 client = commands.Bot(command_prefix = prefix)
 status = cycle(['Prefix: !', 'Reviath'])
@@ -60,6 +59,7 @@ def restart_program():
 async def restart(ctx):
     if str(ctx.author.id) == "770218429096656917":
         await ctx.send("Restarting...")
+        print('Restarting...')
         restart_program()
     else:
         await ctx.send('This command is only for my author.')
